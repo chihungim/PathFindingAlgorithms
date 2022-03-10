@@ -110,7 +110,8 @@ namespace PathFindingAlgorithms
         {
             _start = null;
             _end = null;
-            _animationThread.Interrupt();
+            if(_animationThread != null)
+                _animationThread.Interrupt();
             foreach (var m in _map)
             {
                 m.Tag = null;
@@ -121,6 +122,8 @@ namespace PathFindingAlgorithms
 
         private void button2_Click(object sender, EventArgs e)
         {
+            if (_animationThread != null)
+                _animationThread.Interrupt();
             if (_start == null || _end == null)
             {
                 MessageBox.Show(@"Select the start point or the end point ");
@@ -135,6 +138,7 @@ namespace PathFindingAlgorithms
 
             int[] dirR = { 0, 1, 0, -1, 1, -1, 1, -1 };
             int[] dirC = { 1, 0, -1, 0, 1, -1, -1, 1 };
+            
             if (radioButton1.Checked)
             {
                 dirR = new int[] {0,1,0,-1 };
@@ -150,7 +154,7 @@ namespace PathFindingAlgorithms
             for (int i = 0; i < dirR.Length; i++)
             {
                 int dr = start.Y + dirR[i], dc = start.X + dirC[i];
-                if (isIn(dr, dc) && _map[dr, dc].BackColor != Color.DarkSlateGray)
+                if (IsIn(dr, dc) && _map[dr, dc].BackColor != Color.DarkSlateGray)
                 {
                     q.Enqueue(new Node(_map[dr, dc], null));
                     visited.Add(_map[dr,dc]);
@@ -164,11 +168,11 @@ namespace PathFindingAlgorithms
                 for (int i = 0; i < dirR.Length; i++)
                 {
                     int dr = pos.Y + dirR[i], dc = pos.X + dirC[i];
-                    if (isIn(dr, dc) && !visited.Contains(_map[dr, dc]) && _map[dr, dc].BackColor != Color.DarkSlateGray) 
+                    if (IsIn(dr, dc) && !visited.Contains(_map[dr, dc]) && _map[dr, dc].BackColor != Color.DarkSlateGray) 
                     {
                         if (_map[dr, dc] == _end)
                         {
-                            findPath(cur);
+                            FindPath(cur);
                             return;
                         }
                         q.Enqueue(new Node(_map[dr, dc], cur));
@@ -180,7 +184,7 @@ namespace PathFindingAlgorithms
             MessageBox.Show(@"Failed to Find path");
         }
 
-        void findPath(Node dest)
+        void FindPath(Node dest)
         {
             Node temp = dest;
             List<Label> path = new List<Label>();
@@ -226,9 +230,9 @@ namespace PathFindingAlgorithms
 
 
 
-        bool isIn(int row, int col)
+        bool IsIn(int row, int col)
         {
-            return row > -1 && row < Grid1.RowCount && col > -1 && col < Grid1.ColumnCount;
+            return (row > -1 && row < Grid1.RowCount ) && (col > -1 && col < Grid1.ColumnCount);
         }
 
         Point toPoint(String coordinate)
