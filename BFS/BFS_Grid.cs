@@ -112,6 +112,13 @@ namespace PathFindingAlgorithms
 
         private void button2_Click(object sender, EventArgs e)
         {
+            if (_start == null || _end == null)
+            {
+                MessageBox.Show(@"Select the start point or the end point ");
+                return;
+            }
+
+
             int[] dirR = { 0, 1, 0, -1, 1, -1, 1, -1 };
             int[] dirC = { 1, 0, -1, 0, 1, -1, -1, 1 };
             if (radioButton1.Checked)
@@ -179,6 +186,7 @@ namespace PathFindingAlgorithms
                         p.BackColor = Color.Violet;
                         Thread.Sleep(100);
                     }
+      
                 }
                 catch (ThreadInterruptedException e)
                 {
@@ -201,6 +209,8 @@ namespace PathFindingAlgorithms
             }
 
         };
+
+
 
         bool isIn(int row, int col)
         {

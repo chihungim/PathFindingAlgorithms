@@ -213,7 +213,7 @@ namespace PathFindingAlgorithms
             this.label6.TabIndex = 3;
             this.label6.Text = "Remember Do Not Put the Start Point Right Next to The end Point";
             // 
-            // BFS
+            // BFS_Grid
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -227,7 +227,7 @@ namespace PathFindingAlgorithms
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.Grid1);
-            this.Name = "BFS";
+            this.Name = "BFS_Grid";
             this.Text = "Form1";
             this.flowLayoutPanel1.ResumeLayout(false);
             this.flowLayoutPanel1.PerformLayout();
