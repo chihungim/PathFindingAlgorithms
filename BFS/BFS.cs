@@ -202,8 +202,6 @@ namespace PathFindingAlgorithms
 
         };
 
-
-
         bool isIn(int row, int col)
         {
             return row > -1 && row < Grid1.RowCount && col > -1 && col < Grid1.ColumnCount;
