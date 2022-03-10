@@ -13,14 +13,14 @@ using System.Windows.Forms;
 
 namespace PathFindingAlgorithms
 {
-    public partial class BFS : Form
+    public partial class BFS_Grid : Form
     {
         private Thread animationThread = null;
         Label[,] _map = null;
         private Label _start = null;
         private Label _end = null;
 
-        public BFS()
+        public BFS_Grid()
         {
             InitializeComponent();
             IntializeMap();

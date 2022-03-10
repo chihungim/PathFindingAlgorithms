@@ -1,7 +1,7 @@
 ﻿
 namespace PathFindingAlgorithms
 {
-    partial class BFS
+    partial class BFS_Grid
     {
         /// <summary>
         ///  Required designer variable.

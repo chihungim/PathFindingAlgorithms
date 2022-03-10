@@ -17,7 +17,7 @@ namespace PathFindingAlgorithms
             Application.SetHighDpiMode(HighDpiMode.SystemAware);
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new BFS());
+            Application.Run(new BFS_Grid());
         }
     }
 }
