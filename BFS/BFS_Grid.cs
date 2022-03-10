@@ -68,7 +68,16 @@ namespace PathFindingAlgorithms
                                 break;
                             default: //
                                 Debug.Assert(me != null, nameof(me) + " != null");
-                                me.BackColor = Color.DarkSlateGray;
+                                if (me.BackColor == Color.DarkSlateGray)
+                                {
+                                    me.BackColor = Color.MediumTurquoise;
+                                    me.Text = "";
+                                }
+                                else
+                                {
+                                    me.BackColor = Color.DarkSlateGray;
+                                    me.Text = "";
+                                }
                                 break;
                         }
                     };
