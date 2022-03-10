@@ -35,7 +35,7 @@ namespace PathFindingAlgorithms.BFS
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 511);
+            this.ClientSize = new System.Drawing.Size(810, 523);
             this.Name = "BFS_Graph";
             this.Text = "BFS_Graph";
             this.ResumeLayout(false);
