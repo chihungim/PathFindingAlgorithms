@@ -13,14 +13,14 @@ using System.Windows.Forms;
 
 namespace PathFindingAlgorithms
 {
-    public partial class BFS_Grid : Form
+    public partial class BfsGrid : Form
     {
-        private Thread animationThread = null;
+        private Thread _animationThread = null;
         Label[,] _map = null;
         private Label _start = null;
         private Label _end = null;
 
-        public BFS_Grid()
+        public BfsGrid()
         {
             InitializeComponent();
             IntializeMap();
@@ -42,24 +42,26 @@ namespace PathFindingAlgorithms
                     _map[i, j].Margin = new Padding(0);
                     _map[i, j].TextAlign = ContentAlignment.MiddleCenter;
                     _map[i, j].Name = i + "," + j;
-                    _map[i, j].Click += (sender,  e) =>
+                    _map[i, j].Click += (sender, e) =>
                     {
                         var me = (Label)sender;
-                        var evt = (MouseEventArgs) e;
+                        var evt = (MouseEventArgs)e;
                         switch (evt.Button)
                         {
                             case MouseButtons.Left: //start
-                                Debug.Assert(me != null, nameof(me) + " != null");
-                                if(_start != null){ _start.BackColor = Color.MediumTurquoise;
+                                if (_start != null)
+                                {
+                                    _start.BackColor = Color.MediumTurquoise;
                                     _start.Text = "";
-                                } 
+                                }
                                 me.BackColor = Color.Red;
                                 me.Text = @"Start";
                                 _start = me;
                                 break;
                             case MouseButtons.Right: //end
-                                Debug.Assert(me != null, nameof(me) + " != null");
-                                if(_end != null){ _end.BackColor = Color.MediumTurquoise;
+                                if (_end != null)
+                                {
+                                    _end.BackColor = Color.MediumTurquoise;
                                     _end.Text = "";
                                 }
                                 me.BackColor = Color.Red;
@@ -67,7 +69,6 @@ namespace PathFindingAlgorithms
                                 _end = me;
                                 break;
                             default: //
-                                Debug.Assert(me != null, nameof(me) + " != null");
                                 if (me.BackColor == Color.DarkSlateGray)
                                 {
                                     me.BackColor = Color.MediumTurquoise;
@@ -81,7 +82,6 @@ namespace PathFindingAlgorithms
                                 break;
                         }
                     };
-
                 }
             }
         }
@@ -110,7 +110,7 @@ namespace PathFindingAlgorithms
         {
             _start = null;
             _end = null;
-            animationThread.Interrupt();
+            _animationThread.Interrupt();
             foreach (var m in _map)
             {
                 m.Tag = null;
@@ -125,6 +125,11 @@ namespace PathFindingAlgorithms
             {
                 MessageBox.Show(@"Select the start point or the end point ");
                 return;
+            }
+
+            foreach (var m in _map)
+            {
+                if (m.BackColor == Color.Violet) m.BackColor = Color.MediumTurquoise;
             }
 
 
@@ -187,7 +192,7 @@ namespace PathFindingAlgorithms
 
             path.Reverse();
 
-          animationThread = new Thread(() =>
+          _animationThread = new Thread(() =>
             {
                 try { 
                     foreach (var p in path)
@@ -202,7 +207,7 @@ namespace PathFindingAlgorithms
                 }
             });
 
-          animationThread.Start();
+          _animationThread.Start();
         }
 
         class Node
