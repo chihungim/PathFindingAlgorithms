@@ -72,8 +72,8 @@ namespace PathFindingAlgorithms.BFS
             // 
             // label6
             // 
-            this.label6.Font = new System.Drawing.Font("Source Code Pro", 8.999999F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label6.Location = new System.Drawing.Point(449, 281);
+            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.999999F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label6.Location = new System.Drawing.Point(456, 277);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(316, 34);
             this.label6.TabIndex = 11;
@@ -83,7 +83,7 @@ namespace PathFindingAlgorithms.BFS
             // linklabel1
             // 
             this.linklabel1.AutoSize = true;
-            this.linklabel1.Location = new System.Drawing.Point(449, 251);
+            this.linklabel1.Location = new System.Drawing.Point(456, 251);
             this.linklabel1.Name = "linklabel1";
             this.linklabel1.Size = new System.Drawing.Size(78, 15);
             this.linklabel1.TabIndex = 14;
@@ -95,9 +95,9 @@ namespace PathFindingAlgorithms.BFS
             // 
             this.groupBox1.Controls.Add(this.button1);
             this.groupBox1.Controls.Add(this.button2);
-            this.groupBox1.Location = new System.Drawing.Point(449, 190);
+            this.groupBox1.Location = new System.Drawing.Point(456, 190);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(317, 58);
+            this.groupBox1.Size = new System.Drawing.Size(309, 58);
             this.groupBox1.TabIndex = 13;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Actions";
@@ -107,7 +107,7 @@ namespace PathFindingAlgorithms.BFS
             // 
             this.button1.Location = new System.Drawing.Point(7, 22);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(147, 23);
+            this.button1.Size = new System.Drawing.Size(135, 23);
             this.button1.TabIndex = 4;
             this.button1.Text = "reset";
             this.button1.UseVisualStyleBackColor = true;
@@ -116,13 +116,14 @@ namespace PathFindingAlgorithms.BFS
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(160, 22);
+            this.button2.Location = new System.Drawing.Point(148, 22);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(151, 23);
+            this.button2.Size = new System.Drawing.Size(155, 23);
             this.button2.TabIndex = 4;
             this.button2.Text = "PathFinding";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.UseWaitCursor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // label2
             // 
@@ -140,12 +141,13 @@ namespace PathFindingAlgorithms.BFS
             this.listBox1.FormattingEnabled = true;
             this.listBox1.ItemHeight = 15;
             this.listBox1.Items.AddRange(new object[] {
-            "1. Right Click on Bordered Area will add Node",
+            "1. Right Click on Bordered Area will add Node ",
+            "\t\t\t(Max Amount = 10)",
             "2. Left Click on Node will Show PopupMenu ",
             "                             (Remove, Connect, toStart, toEnd)"});
-            this.listBox1.Location = new System.Drawing.Point(449, 105);
+            this.listBox1.Location = new System.Drawing.Point(456, 105);
             this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(316, 64);
+            this.listBox1.Size = new System.Drawing.Size(309, 64);
             this.listBox1.TabIndex = 15;
             // 
             // NodeControlMenu
@@ -177,12 +179,14 @@ namespace PathFindingAlgorithms.BFS
             this.ctrlToStart.Name = "ctrlToStart";
             this.ctrlToStart.Size = new System.Drawing.Size(117, 22);
             this.ctrlToStart.Text = "toStart";
+            this.ctrlToStart.Click += new System.EventHandler(this.ctrlToStart_Click);
             // 
             // ctrlToEnd
             // 
             this.ctrlToEnd.Name = "ctrlToEnd";
             this.ctrlToEnd.Size = new System.Drawing.Size(117, 22);
             this.ctrlToEnd.Text = "toEnd";
+            this.ctrlToEnd.Click += new System.EventHandler(this.ctrlToEnd_Click);
             // 
             // BFS_Graph
             // 

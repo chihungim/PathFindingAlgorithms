@@ -215,7 +215,7 @@ namespace PathFindingAlgorithms
             // 
             // label6
             // 
-            this.label6.Font = new System.Drawing.Font("Source Code Pro", 8.999999F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.999999F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.label6.Location = new System.Drawing.Point(446, 297);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(222, 34);
