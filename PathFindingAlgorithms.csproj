@@ -26,4 +26,9 @@
     </EmbeddedResource>
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="bin\" />
+    <Folder Include="CustomControls\" />
+  </ItemGroup>
+
 </Project>

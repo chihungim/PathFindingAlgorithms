@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using PathFindingAlgorithms.BFS;
 
 namespace PathFindingAlgorithms
 {
@@ -17,7 +18,7 @@ namespace PathFindingAlgorithms
             Application.SetHighDpiMode(HighDpiMode.SystemAware);
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new BfsGrid());
+            Application.Run(new BFS_Graph());
         }
     }
 }

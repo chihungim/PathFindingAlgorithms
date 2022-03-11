@@ -85,9 +85,9 @@ namespace PathFindingAlgorithms
             this.label1.Font = new System.Drawing.Font("Microsoft YaHei Light", 26.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point);
             this.label1.Location = new System.Drawing.Point(0, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(280, 46);
+            this.label1.Size = new System.Drawing.Size(368, 46);
             this.label1.TabIndex = 1;
-            this.label1.Text = "BFS-PathFinding";
+            this.label1.Text = "BFS-PathFinding(Grid)";
             this.label1.UseWaitCursor = true;
             // 
             // label2
