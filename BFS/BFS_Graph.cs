@@ -15,7 +15,6 @@ namespace PathFindingAlgorithms.BFS
         private int _start, _end = 0;
         private const int MaxCount = 100001;
         private List<int> []graph = new List<int>[MaxCount];
-        private List<Label> _nodeList = new List<Label>();
         private Graphics g;
         public BFS_Graph()
         {
@@ -33,7 +32,6 @@ namespace PathFindingAlgorithms.BFS
                 var toList = from.Tag as List<Label>;
                 toList.Remove(remover);
             }
-            _nodeList.Remove(remover);
             panel1.Controls.Remove(remover);
             panel1.Invalidate();
         }
@@ -56,6 +54,14 @@ namespace PathFindingAlgorithms.BFS
                 }
         }
 
+        private void BFS_Graph_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+        }
 
         private void ctrlConnect_Click(object sender, EventArgs e)
         {
@@ -101,13 +107,11 @@ namespace PathFindingAlgorithms.BFS
                 Node.Location = new Point(evt.X - (40/2),evt.Y - (40/2));
                 Node.ContextMenuStrip = NodeControlMenu;
                 Node.Tag = new List<Label>();
-                Node.Name = _nodeList.Count + "";
                 if (Node.GetChildAtPoint(Node.Location) != null)
                     return;
                 Node.TextAlign = ContentAlignment.MiddleCenter;
-                Node.Text = _nodeList.Count + "";
                 panel1.Controls.Add(Node);
-                _nodeList.Add(Node);
+                //주석 각 노드별 이름 Define 방법 정해야함
             }
         }
     }

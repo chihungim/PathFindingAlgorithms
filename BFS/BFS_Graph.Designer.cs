@@ -112,6 +112,7 @@ namespace PathFindingAlgorithms.BFS
             this.button1.Text = "reset";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.UseWaitCursor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // button2
             // 
@@ -197,6 +198,7 @@ namespace PathFindingAlgorithms.BFS
             this.Controls.Add(this.label1);
             this.Name = "BFS_Graph";
             this.Text = "BFS_Graph";
+            this.Load += new System.EventHandler(this.BFS_Graph_Load);
             this.groupBox1.ResumeLayout(false);
             this.NodeControlMenu.ResumeLayout(false);
             this.ResumeLayout(false);
