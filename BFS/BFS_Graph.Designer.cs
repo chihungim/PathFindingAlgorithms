@@ -31,12 +31,12 @@ namespace PathFindingAlgorithms.BFS
         {
             this.components = new System.ComponentModel.Container();
             this.label1 = new System.Windows.Forms.Label();
-            this.panel1 = new System.Windows.Forms.Panel();
+            this.BackGround = new System.Windows.Forms.Panel();
             this.label6 = new System.Windows.Forms.Label();
             this.linklabel1 = new System.Windows.Forms.LinkLabel();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
+            this.crtlReset = new System.Windows.Forms.Button();
+            this.ctrlPathFinding = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.listBox1 = new System.Windows.Forms.ListBox();
             this.NodeControlMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
@@ -60,15 +60,15 @@ namespace PathFindingAlgorithms.BFS
             this.label1.Text = "BFS-PathFinding(Graph)";
             this.label1.UseWaitCursor = true;
             // 
-            // panel1
+            // BackGround
             // 
-            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel1.Location = new System.Drawing.Point(12, 49);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(400, 400);
-            this.panel1.TabIndex = 3;
-            this.panel1.Click += new System.EventHandler(this.panel1_Click);
-            this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
+            this.BackGround.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.BackGround.Location = new System.Drawing.Point(12, 49);
+            this.BackGround.Name = "BackGround";
+            this.BackGround.Size = new System.Drawing.Size(400, 400);
+            this.BackGround.TabIndex = 3;
+            this.BackGround.Click += new System.EventHandler(this.BackGround_Click);
+            this.BackGround.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
             // label6
             // 
@@ -90,11 +90,12 @@ namespace PathFindingAlgorithms.BFS
             this.linklabel1.TabStop = true;
             this.linklabel1.Text = "MyGitHub ♥";
             this.linklabel1.UseWaitCursor = true;
+            this.linklabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linklabel1_LinkClicked);
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.button1);
-            this.groupBox1.Controls.Add(this.button2);
+            this.groupBox1.Controls.Add(this.crtlReset);
+            this.groupBox1.Controls.Add(this.ctrlPathFinding);
             this.groupBox1.Location = new System.Drawing.Point(456, 190);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(309, 58);
@@ -103,27 +104,27 @@ namespace PathFindingAlgorithms.BFS
             this.groupBox1.Text = "Actions";
             this.groupBox1.UseWaitCursor = true;
             // 
-            // button1
+            // crtlReset
             // 
-            this.button1.Location = new System.Drawing.Point(7, 22);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(135, 23);
-            this.button1.TabIndex = 4;
-            this.button1.Text = "reset";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.UseWaitCursor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.crtlReset.Location = new System.Drawing.Point(7, 22);
+            this.crtlReset.Name = "crtlReset";
+            this.crtlReset.Size = new System.Drawing.Size(135, 23);
+            this.crtlReset.TabIndex = 4;
+            this.crtlReset.Text = "reset";
+            this.crtlReset.UseVisualStyleBackColor = true;
+            this.crtlReset.UseWaitCursor = true;
+            this.crtlReset.Click += new System.EventHandler(this.ctrlReset_Click);
             // 
-            // button2
+            // ctrlPathFinding
             // 
-            this.button2.Location = new System.Drawing.Point(148, 22);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(155, 23);
-            this.button2.TabIndex = 4;
-            this.button2.Text = "PathFinding";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.UseWaitCursor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.ctrlPathFinding.Location = new System.Drawing.Point(148, 22);
+            this.ctrlPathFinding.Name = "ctrlPathFinding";
+            this.ctrlPathFinding.Size = new System.Drawing.Size(155, 23);
+            this.ctrlPathFinding.TabIndex = 4;
+            this.ctrlPathFinding.Text = "PathFinding";
+            this.ctrlPathFinding.UseVisualStyleBackColor = true;
+            this.ctrlPathFinding.UseWaitCursor = true;
+            this.ctrlPathFinding.Click += new System.EventHandler(this.ctrlPathFinding_Click);
             // 
             // label2
             // 
@@ -165,7 +166,7 @@ namespace PathFindingAlgorithms.BFS
             this.ctrlRemove.Name = "ctrlRemove";
             this.ctrlRemove.Size = new System.Drawing.Size(117, 22);
             this.ctrlRemove.Text = "Remove";
-            this.ctrlRemove.Click += new System.EventHandler(this.toolStripMenuItem1_Click);
+            this.ctrlRemove.Click += new System.EventHandler(this.ctrlRemove_Click);
             // 
             // ctrlConnect
             // 
@@ -198,11 +199,13 @@ namespace PathFindingAlgorithms.BFS
             this.Controls.Add(this.linklabel1);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.panel1);
+            this.Controls.Add(this.BackGround);
             this.Controls.Add(this.label1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "BFS_Graph";
             this.Text = "BFS_Graph";
-            this.Load += new System.EventHandler(this.BFS_Graph_Load);
             this.groupBox1.ResumeLayout(false);
             this.NodeControlMenu.ResumeLayout(false);
             this.ResumeLayout(false);
@@ -213,12 +216,12 @@ namespace PathFindingAlgorithms.BFS
         #endregion
 
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Panel BackGround;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.LinkLabel linklabel1;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button crtlReset;
+        private System.Windows.Forms.Button ctrlPathFinding;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ListBox listBox1;
         private System.Windows.Forms.ContextMenuStrip NodeControlMenu;
