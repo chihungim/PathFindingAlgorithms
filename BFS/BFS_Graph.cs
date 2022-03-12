@@ -12,10 +12,14 @@ namespace PathFindingAlgorithms.BFS
     
     public partial class BFS_Graph : Form
     {
+
+        #region Fields
         public const int MAX = 10;
         private Label _target1, _target2;
         private Label _start = null, _end = null;
         private List<Label> path;
+        #endregion
+
         public BFS_Graph()
         {
             InitializeComponent();
