@@ -28,7 +28,7 @@
 
   <ItemGroup>
     <Folder Include="bin\" />
-    <Folder Include="CustomControls\" />
+    <Folder Include="A-Star\" />
   </ItemGroup>
 
 </Project>

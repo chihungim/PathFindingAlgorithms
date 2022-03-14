@@ -39,13 +39,13 @@ namespace PathFindingAlgorithms.BFS
             this.ctrlPathFinding = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.listBox1 = new System.Windows.Forms.ListBox();
-            this.NodeControlMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.VertexControlMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.ctrlRemove = new System.Windows.Forms.ToolStripMenuItem();
             this.ctrlConnect = new System.Windows.Forms.ToolStripMenuItem();
             this.ctrlToStart = new System.Windows.Forms.ToolStripMenuItem();
             this.ctrlToEnd = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox1.SuspendLayout();
-            this.NodeControlMenu.SuspendLayout();
+            this.VertexControlMenu.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
@@ -68,7 +68,6 @@ namespace PathFindingAlgorithms.BFS
             this.BackGround.Size = new System.Drawing.Size(400, 400);
             this.BackGround.TabIndex = 3;
             this.BackGround.Click += new System.EventHandler(this.BackGround_Click);
-            this.BackGround.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
             // label6
             // 
@@ -151,15 +150,15 @@ namespace PathFindingAlgorithms.BFS
             this.listBox1.Size = new System.Drawing.Size(309, 64);
             this.listBox1.TabIndex = 15;
             // 
-            // NodeControlMenu
+            // VertexControlMenu
             // 
-            this.NodeControlMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.VertexControlMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.ctrlRemove,
             this.ctrlConnect,
             this.ctrlToStart,
             this.ctrlToEnd});
-            this.NodeControlMenu.Name = "contextMenuStrip1";
-            this.NodeControlMenu.Size = new System.Drawing.Size(118, 92);
+            this.VertexControlMenu.Name = "contextMenuStrip1";
+            this.VertexControlMenu.Size = new System.Drawing.Size(118, 92);
             // 
             // ctrlRemove
             // 
@@ -207,7 +206,7 @@ namespace PathFindingAlgorithms.BFS
             this.Name = "BFS_Graph";
             this.Text = "BFS_Graph";
             this.groupBox1.ResumeLayout(false);
-            this.NodeControlMenu.ResumeLayout(false);
+            this.VertexControlMenu.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -224,7 +223,7 @@ namespace PathFindingAlgorithms.BFS
         private System.Windows.Forms.Button ctrlPathFinding;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ListBox listBox1;
-        private System.Windows.Forms.ContextMenuStrip NodeControlMenu;
+        private System.Windows.Forms.ContextMenuStrip VertexControlMenu;
         private System.Windows.Forms.ToolStripMenuItem ctrlRemove;
         private System.Windows.Forms.ToolStripMenuItem ctrlConnect;
         private System.Windows.Forms.ToolStripMenuItem ctrlToStart;

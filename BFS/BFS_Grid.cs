@@ -20,6 +20,7 @@ namespace PathFindingAlgorithms
         private Label _start = null;
         private Label _end = null;
 
+        #region init
         public BfsGrid()
         {
             InitializeComponent();
@@ -86,7 +87,10 @@ namespace PathFindingAlgorithms
             }
         }
 
- 
+        #endregion
+
+
+        #region ctrl
 
         private void linklabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
@@ -103,14 +107,14 @@ namespace PathFindingAlgorithms
                 Console.WriteLine(exception);
                 throw;
             }
-           
+
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
             _start = null;
             _end = null;
-            if(_animationThread != null)
+            if (_animationThread != null)
                 _animationThread.Interrupt();
             foreach (var m in _map)
             {
@@ -119,6 +123,11 @@ namespace PathFindingAlgorithms
                 m.Text = "";
             }
         }
+
+        #endregion
+
+
+        #region findPath
 
         private void button2_Click(object sender, EventArgs e)
         {
@@ -138,10 +147,10 @@ namespace PathFindingAlgorithms
 
             int[] dirR = { 0, 1, 0, -1, 1, -1, 1, -1 };
             int[] dirC = { 1, 0, -1, 0, 1, -1, -1, 1 };
-            
+
             if (radioButton1.Checked)
             {
-                dirR = new int[] {0,1,0,-1 };
+                dirR = new int[] { 0, 1, 0, -1 };
                 dirC = new int[] { 1, 0, -1, 0 };
             }
 
@@ -149,35 +158,31 @@ namespace PathFindingAlgorithms
             List<Label> visited = new List<Label>();
             Queue<Node> q = new Queue<Node>();
 
-            var start = toPoint(_start.Name);
+            visited.Add(_start);
 
-            for (int i = 0; i < dirR.Length; i++)
-            {
-                int dr = start.Y + dirR[i], dc = start.X + dirC[i];
-                if (IsIn(dr, dc) && _map[dr, dc].BackColor != Color.DarkSlateGray)
-                {
-                    q.Enqueue(new Node(_map[dr, dc], null));
-                    visited.Add(_map[dr,dc]);
-                }
-            }
-
-            while (q.Count != 0)
+            q.Enqueue(new Node(_start, null));
+            while (q.Count > 0)
             {
                 var cur = q.Dequeue();
                 var pos = toPoint(cur.Me.Name);
+
+                cur.Me.BackColor = Color.Chartreuse;
+
+                if (cur.Me == _end)
+                {
+                    FindPath(cur);
+                    return;
+                }
+
                 for (int i = 0; i < dirR.Length; i++)
                 {
                     int dr = pos.Y + dirR[i], dc = pos.X + dirC[i];
-                    if (IsIn(dr, dc) && !visited.Contains(_map[dr, dc]) && _map[dr, dc].BackColor != Color.DarkSlateGray) 
-                    {
-                        if (_map[dr, dc] == _end)
-                        {
-                            FindPath(cur);
-                            return;
-                        }
-                        q.Enqueue(new Node(_map[dr, dc], cur));
-                        visited.Add(_map[dr, dc]);
-                    }
+                    if (!IsIn(dr, dc) || visited.Contains(_map[dr, dc]) ||
+                        _map[dr, dc].BackColor == Color.DarkSlateGray) continue;
+                    Thread.Sleep(100);
+                    Application.DoEvents();
+                    q.Enqueue(new Node(_map[dr, dc], cur));
+                    visited.Add(_map[dr, dc]);
                 }
             }
 
@@ -196,22 +201,23 @@ namespace PathFindingAlgorithms
 
             path.Reverse();
 
-          _animationThread = new Thread(() =>
+            _animationThread = new Thread(() =>
             {
-                try { 
+                try
+                {
                     foreach (var p in path)
                     {
                         p.BackColor = Color.Violet;
                         Thread.Sleep(100);
                     }
-      
+
                 }
                 catch (ThreadInterruptedException e)
                 {
                 }
             });
 
-          _animationThread.Start();
+            _animationThread.Start();
         }
 
         class Node
@@ -228,11 +234,9 @@ namespace PathFindingAlgorithms
 
         };
 
-
-
         bool IsIn(int row, int col)
         {
-            return (row > -1 && row < Grid1.RowCount ) && (col > -1 && col < Grid1.ColumnCount);
+            return (row > -1 && row < Grid1.RowCount) && (col > -1 && col < Grid1.ColumnCount);
         }
 
         Point toPoint(String coordinate)
@@ -241,5 +245,10 @@ namespace PathFindingAlgorithms
             int c = Int32.Parse(coordinate.Split(',')[1]);
             return new Point(c, r);
         }
+
+        #endregion
+
+
+
     }
 }
