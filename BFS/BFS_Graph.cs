@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Security.Cryptography;
 using System.Threading;
 using System.Windows.Forms;
+using PathFindingAlgorithms.CustomControls;
 
 
 namespace PathFindingAlgorithms.BFS
@@ -19,19 +20,28 @@ namespace PathFindingAlgorithms.BFS
         private Label _target1, _target2;
         private Label _start = null, _end = null;
         private List<Label> path;
-        private 
+        private GraphPanel _graphPanel = new GraphPanel();
         #endregion
 
         public BFS_Graph()
         {
             InitializeComponent();
-            g = new ControlGraph(BackGround);
+            panel1.Controls.Add(_graphPanel);
+            _graphPanel.Dock = DockStyle.Fill;
+            _graphPanel.Click += GraphPanelOnClick;
+        }
+
+        private void GraphPanelOnClick(object? sender, EventArgs e)
+        {
+            var evt = e as MouseEventArgs;
+            if (evt.Button == MouseButtons.Left)
+                _graphPanel.AddVertexLabel(evt.Location).ContextMenuStrip = VertexControlMenu;
         }
 
         #region ctrl
         private void ctrlReset_Click(object sender, EventArgs e)
         {
-            g.Graph.Controls.Clear();
+            _graphPanel.RemoveAllVertex();
         }
         private void ctrlToStart_Click(object sender, EventArgs e)
         {
@@ -59,8 +69,7 @@ namespace PathFindingAlgorithms.BFS
                     return;
                 }
                 ctrlConnect.Text = @"From";
-                g.CreateEdge(_target1, _target2);
-                g.Graph.Invalidate();
+                _graphPanel.CreateEdge(_target1, _target2);
                 _target1 = null;
                 _target2 = null;
             }
@@ -76,8 +85,7 @@ namespace PathFindingAlgorithms.BFS
                 ctrlConnect.Text = @"From";
             }
             
-            g.RemoveVertexLabel(vertexLabel);
-            g.Graph.Invalidate();
+            _graphPanel.RemoveVertexLabel(vertexLabel);
         }
 
 
@@ -105,17 +113,17 @@ namespace PathFindingAlgorithms.BFS
                 return;
             }
 
-            var graph = new List<Label>[BackGround.Controls.Count];
+            var graph = new List<Label>[_graphPanel.Controls.Count];
             var visited = new List<Label>();
             
             path = null;
 
-            for (int i = 0; i < BackGround.Controls.Count; i++)
+            for (int i = 0; i < _graphPanel.Controls.Count; i++)
             {
-                graph[i] = BackGround.Controls[i].Tag as List<Label>;
-                if (BackGround.Controls[i].BackColor == Color.DarkMagenta)
-                    BackGround.Controls[i].BackColor = Color.AliceBlue;
-                BackGround.Name = i + "";
+                graph[i] = _graphPanel.Controls[i].Tag as List<Label>;
+                if (_graphPanel.Controls[i].BackColor == Color.DarkMagenta)
+                    _graphPanel.Controls[i].BackColor = Color.AliceBlue;
+                _graphPanel.Name = i + "";
             }
 
             var q = new Queue<Node>();
@@ -165,7 +173,7 @@ namespace PathFindingAlgorithms.BFS
                 p.BackColor = Color.DarkMagenta;
             }
 
-            BackGround.Invalidate();
+            _graphPanel.Invalidate();
         }
 
 
@@ -190,13 +198,7 @@ namespace PathFindingAlgorithms.BFS
             }
         }
 
-        private void BackGround_Click(object sender, EventArgs e)
-        {
-            var evt = (MouseEventArgs)e;
-            if (evt.Button == MouseButtons.Left)
-                g.AddVertexLabel(evt.Location).ContextMenuStrip = VertexControlMenu;
-        }
-
+        
         #endregion
 
     }

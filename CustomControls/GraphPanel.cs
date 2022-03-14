@@ -8,17 +8,28 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml;
 
-namespace CustomControls
+namespace PathFindingAlgorithms.CustomControls
 {
     class GraphPanel : Panel
     {
         private const Int64 Max = 255;
         private readonly Size _defaultVertexSize = new Size(40, 40);
         private readonly  Color _defaultVertexColor = Color.Aqua;
+        private ContextMenuStrip vertextMenuStrip;
+        public GraphPanel(){
+            Init();
+        }
 
-        public GraphPanel(Panel graph)
+        void Init()
         {
             this.Paint += Graph_Paint; //draw event
+            BorderStyle = BorderStyle.FixedSingle;
+        }
+
+        public void RemoveAllVertex()
+        {
+            Controls.Clear();
+            Invalidate();
         }
 
         #region Draw Edge

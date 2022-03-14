@@ -15,6 +15,7 @@ namespace PathFindingAlgorithms.Dijkstra
         public Dijkstra_Graph()
         {
             InitializeComponent();
+            MessageBox.Show("Test");
         }
     }
 }

@@ -30,49 +30,30 @@ namespace PathFindingAlgorithms.BFS
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.label1 = new System.Windows.Forms.Label();
-            this.BackGround = new System.Windows.Forms.Panel();
             this.label6 = new System.Windows.Forms.Label();
             this.linklabel1 = new System.Windows.Forms.LinkLabel();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.crtlReset = new System.Windows.Forms.Button();
             this.ctrlPathFinding = new System.Windows.Forms.Button();
-            this.label2 = new System.Windows.Forms.Label();
-            this.listBox1 = new System.Windows.Forms.ListBox();
             this.VertexControlMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.ctrlRemove = new System.Windows.Forms.ToolStripMenuItem();
             this.ctrlConnect = new System.Windows.Forms.ToolStripMenuItem();
             this.ctrlToStart = new System.Windows.Forms.ToolStripMenuItem();
             this.ctrlToEnd = new System.Windows.Forms.ToolStripMenuItem();
+            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.label1 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.VertexControlMenu.SuspendLayout();
+            this.tableLayoutPanel1.SuspendLayout();
+            this.flowLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.label1.Font = new System.Drawing.Font("Microsoft YaHei Light", 26.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point);
-            this.label1.Location = new System.Drawing.Point(0, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(399, 46);
-            this.label1.TabIndex = 2;
-            this.label1.Text = "BFS-PathFinding(Graph)";
-            this.label1.UseWaitCursor = true;
-            // 
-            // BackGround
-            // 
-            this.BackGround.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.BackGround.Location = new System.Drawing.Point(12, 49);
-            this.BackGround.Name = "BackGround";
-            this.BackGround.Size = new System.Drawing.Size(400, 400);
-            this.BackGround.TabIndex = 3;
-            this.BackGround.Click += new System.EventHandler(this.BackGround_Click);
             // 
             // label6
             // 
             this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.999999F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label6.Location = new System.Drawing.Point(456, 277);
+            this.label6.Location = new System.Drawing.Point(3, 64);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(316, 34);
             this.label6.TabIndex = 11;
@@ -82,7 +63,7 @@ namespace PathFindingAlgorithms.BFS
             // linklabel1
             // 
             this.linklabel1.AutoSize = true;
-            this.linklabel1.Location = new System.Drawing.Point(456, 251);
+            this.linklabel1.Location = new System.Drawing.Point(3, 98);
             this.linklabel1.Name = "linklabel1";
             this.linklabel1.Size = new System.Drawing.Size(78, 15);
             this.linklabel1.TabIndex = 14;
@@ -95,7 +76,7 @@ namespace PathFindingAlgorithms.BFS
             // 
             this.groupBox1.Controls.Add(this.crtlReset);
             this.groupBox1.Controls.Add(this.ctrlPathFinding);
-            this.groupBox1.Location = new System.Drawing.Point(456, 190);
+            this.groupBox1.Location = new System.Drawing.Point(3, 3);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(309, 58);
             this.groupBox1.TabIndex = 13;
@@ -124,31 +105,6 @@ namespace PathFindingAlgorithms.BFS
             this.ctrlPathFinding.UseVisualStyleBackColor = true;
             this.ctrlPathFinding.UseWaitCursor = true;
             this.ctrlPathFinding.Click += new System.EventHandler(this.ctrlPathFinding_Click);
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("맑은 고딕", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label2.Location = new System.Drawing.Point(449, 49);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(170, 37);
-            this.label2.TabIndex = 10;
-            this.label2.Text = "How to use?";
-            this.label2.UseWaitCursor = true;
-            // 
-            // listBox1
-            // 
-            this.listBox1.FormattingEnabled = true;
-            this.listBox1.ItemHeight = 15;
-            this.listBox1.Items.AddRange(new object[] {
-            "1. Right Click on Bordered Area will add Node ",
-            "\t\t\t(Max Amount = 10)",
-            "2. Left Click on Node will Show PopupMenu ",
-            "                             (Remove, Connect, toStart, toEnd)"});
-            this.listBox1.Location = new System.Drawing.Point(456, 105);
-            this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(309, 64);
-            this.listBox1.TabIndex = 15;
             // 
             // VertexControlMenu
             // 
@@ -188,17 +144,60 @@ namespace PathFindingAlgorithms.BFS
             this.ctrlToEnd.Text = "toEnd";
             this.ctrlToEnd.Click += new System.EventHandler(this.ctrlToEnd_Click);
             // 
+            // tableLayoutPanel1
+            // 
+            this.tableLayoutPanel1.ColumnCount = 2;
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel1, 1, 0);
+            this.tableLayoutPanel1.Controls.Add(this.panel1, 0, 0);
+            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 46);
+            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            this.tableLayoutPanel1.RowCount = 1;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(780, 415);
+            this.tableLayoutPanel1.TabIndex = 15;
+            // 
+            // flowLayoutPanel1
+            // 
+            this.flowLayoutPanel1.Controls.Add(this.groupBox1);
+            this.flowLayoutPanel1.Controls.Add(this.label6);
+            this.flowLayoutPanel1.Controls.Add(this.linklabel1);
+            this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(393, 3);
+            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(384, 409);
+            this.flowLayoutPanel1.TabIndex = 0;
+            // 
+            // panel1
+            // 
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel1.Location = new System.Drawing.Point(3, 3);
+            this.panel1.Name = "panel1";
+            this.panel1.Padding = new System.Windows.Forms.Padding(5);
+            this.panel1.Size = new System.Drawing.Size(384, 409);
+            this.panel1.TabIndex = 1;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.label1.Font = new System.Drawing.Font("Microsoft YaHei Light", 26.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point);
+            this.label1.Location = new System.Drawing.Point(0, 0);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(399, 46);
+            this.label1.TabIndex = 2;
+            this.label1.Text = "BFS-PathFinding(Graph)";
+            this.label1.UseWaitCursor = true;
+            // 
             // BFS_Graph
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(780, 461);
-            this.Controls.Add(this.listBox1);
-            this.Controls.Add(this.label6);
-            this.Controls.Add(this.linklabel1);
-            this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.BackGround);
+            this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.label1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
@@ -207,26 +206,28 @@ namespace PathFindingAlgorithms.BFS
             this.Text = "BFS_Graph";
             this.groupBox1.ResumeLayout(false);
             this.VertexControlMenu.ResumeLayout(false);
+            this.tableLayoutPanel1.ResumeLayout(false);
+            this.flowLayoutPanel1.ResumeLayout(false);
+            this.flowLayoutPanel1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Panel BackGround;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.LinkLabel linklabel1;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Button crtlReset;
         private System.Windows.Forms.Button ctrlPathFinding;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.ListBox listBox1;
         private System.Windows.Forms.ContextMenuStrip VertexControlMenu;
         private System.Windows.Forms.ToolStripMenuItem ctrlRemove;
         private System.Windows.Forms.ToolStripMenuItem ctrlConnect;
         private System.Windows.Forms.ToolStripMenuItem ctrlToStart;
         private System.Windows.Forms.ToolStripMenuItem ctrlToEnd;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
+        private System.Windows.Forms.Panel panel1;
     }
 }
