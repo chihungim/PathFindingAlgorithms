@@ -1,8 +1,5 @@
-# What is this
-Examples and explanations of Pathfinding algorithms<br>
-Basically, all the code is written in C#, which is for my C# study. <br>
-It gives two example of Map. Grid and Graph
-
+# 이게 무엇인가?
+Winform 으로 가시화된 길찾기 알고리즘
 # BFS
 
 # Dijkstra
