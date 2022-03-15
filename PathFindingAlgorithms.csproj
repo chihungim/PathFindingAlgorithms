@@ -4,12 +4,20 @@
     <OutputType>WinExe</OutputType>
     <TargetFramework>net5.0-windows</TargetFramework>
     <UseWindowsForms>true</UseWindowsForms>
+    <ApplicationIcon />
+    <StartupObject />
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
     <PlatformTarget>AnyCPU</PlatformTarget>
     <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="A-Star\**" />
+    <EmbeddedResource Remove="A-Star\**" />
+    <None Remove="A-Star\**" />
+  </ItemGroup>
 
   <ItemGroup>
     <Compile Update="Properties\Resources.Designer.cs">
@@ -28,7 +36,6 @@
 
   <ItemGroup>
     <Folder Include="bin\" />
-    <Folder Include="A-Star\" />
   </ItemGroup>
 
 </Project>

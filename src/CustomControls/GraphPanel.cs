@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
+using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -13,10 +14,8 @@ namespace PathFindingAlgorithms.CustomControls
     class GraphPanel : Panel
     {
         private const Int64 Max = 255;
-        private readonly Size _defaultVertexSize = new Size(40, 40);
-        private readonly  Color _defaultVertexColor = Color.Aqua;
-        private ContextMenuStrip vertextMenuStrip;
-        public GraphPanel(){
+        public GraphPanel()
+        {
             Init();
         }
 
@@ -26,11 +25,7 @@ namespace PathFindingAlgorithms.CustomControls
             BorderStyle = BorderStyle.FixedSingle;
         }
 
-        public void RemoveAllVertex()
-        {
-            Controls.Clear();
-            Invalidate();
-        }
+        
 
         #region Draw Edge
         public void Graph_Paint(Object sender, PaintEventArgs e)
@@ -41,16 +36,23 @@ namespace PathFindingAlgorithms.CustomControls
                                
             foreach (Label from in Controls)
             {
-                int x1 = from.Location.X + _defaultVertexSize.Width/2, y1 = from.Location.Y + _defaultVertexSize.Height / 2;
-                foreach (var to in (List<Label>)@from.Tag)
+                int x1 = from.Location.X + VertexLabel.DefaultVertexSize.Width/2, y1 = from.Location.Y + VertexLabel.DefaultVertexSize.Height / 2;
+                foreach (var to in ((Dictionary<VertexLabel,int>)@from.Tag).Keys)
                 {
-                    int x2 = to.Location.X + _defaultVertexSize.Width / 2, y2 = to.Location.Y + _defaultVertexSize.Height / 2;
+                    int x2 = to.Location.X + VertexLabel.DefaultVertexSize.Width / 2, y2 = to.Location.Y + VertexLabel.DefaultVertexSize.Height / 2;
                     g.DrawLine(blackPen, x1, y1, x2, y2);
                 }
             }
         }
         #endregion
-        #region Vertex Control
+
+        #region VertexControl
+        public void RemoveAllVertex()
+        {
+            Controls.Clear();
+            Invalidate();
+        }
+
         public Label AddVertexLabel(Point position)
         {
             if (Controls.Count == Max)
@@ -58,42 +60,39 @@ namespace PathFindingAlgorithms.CustomControls
                 Debug.Print("Cannot Add More then 255 Nodes");
                 return null;
             }
-
-            var vertex = new Label();
-            vertex.Size = _defaultVertexSize;
-            vertex.Tag = new List<Label>();
-            vertex.Location = new Point(position.X - _defaultVertexSize.Width / 2, position.Y - _defaultVertexSize.Height / 2);
-            vertex.BorderStyle = BorderStyle.FixedSingle;
-            vertex.BackColor = _defaultVertexColor;
-            vertex.Name = Controls.Count + "";
+            var vertex = new VertexLabel(position, Controls.Count + "");
             Controls.Add(vertex);
             return vertex;
         }
 
-        public void CreateEdge(Label from, Label to)
+        public void CreateEdge(VertexLabel from, VertexLabel to)
         {
-            var fromList = from.Tag as List<Label>;
-            var toList = to.Tag as List<Label>;
+            var fromList = from.Tag as Dictionary<VertexLabel, int>;
+            var toList = to.Tag as Dictionary<VertexLabel, int>;
 
-            if (fromList.Contains(to))
+            if (fromList.ContainsKey(to))
             {
                 Debug.Print("These Nodes are already connected");
                 return;
             }
             //undirected graph
-            fromList.Add(to);
-            toList.Add(from);
+            Vector2 fromVector = new Vector2(from.Location.X + VertexLabel.DefaultVertexSize.Width / 2,
+                from.Location.Y + VertexLabel.DefaultVertexSize.Height / 2);
+            Vector2 toVector = new Vector2(to.Location.X + VertexLabel.DefaultVertexSize.Width / 2,
+                to.Location.Y + VertexLabel.DefaultVertexSize.Height / 2);
+            fromList.Add(to, (int)Vector2.Distance(fromVector,toVector));
+            toList.Add(from, (int)Vector2.Distance(fromVector, toVector));
             Invalidate();
 
         }
 
-        public void RemoveVertexLabel(Label vertexLabel)
+        public void RemoveVertexLabel(VertexLabel vertexLabel)
         {
             //Find the connection and remove
-            foreach(Label from in Controls)
+            foreach(VertexLabel from in Controls)
             {
-                var toList = from.Tag as List<Label>;
-                if (toList.Contains(vertexLabel))
+                var toList = from.Tag as Dictionary<VertexLabel, int>;
+                if (toList.ContainsKey(vertexLabel))
                     toList.Remove(vertexLabel);
             }
 
