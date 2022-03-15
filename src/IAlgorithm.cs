@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
@@ -9,6 +10,22 @@ namespace PathFindingAlgorithms
 {
     interface IAlgorithm
     {
+
+
+        Action<VertexLabel, VertexLabel> Options(int idx)
+        {
+            Action<VertexLabel, VertexLabel>[] options =
+            {
+                PathFinding_BFS,
+                PathFinding_Dijkstra,
+                PathFinding_AStar
+            };
+
+            return options[idx];
+        }
+
+
+
         #region PathFind-BFS
         public void PathFinding_BFS(VertexLabel startVertexLabel, VertexLabel destVertexLabel)
         {
@@ -61,14 +78,21 @@ namespace PathFindingAlgorithms
         #endregion
 
         #region PathFind-A*
-    
+        public void PathFinding_AStar(VertexLabel start, VertexLabel end)
+        {
+
+        }
 
 
         #endregion
 
         #region PathFind-Dijkstra
 
-        
+        void PathFinding_Dijkstra(VertexLabel start, VertexLabel end)
+        {
+
+        }
+
 
         #endregion
 

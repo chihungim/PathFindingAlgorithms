@@ -13,7 +13,7 @@ using System.Windows.Forms;
 
 namespace PathFindingAlgorithms
 {
-    public partial class BFS_Grid : Form
+    public partial class PathFinding_Grid : Form
     {
         private Thread _animationThread = null;
         Label[,] _map = null;
@@ -21,7 +21,7 @@ namespace PathFindingAlgorithms
         private Label _end = null;
 
         #region init
-        public BFS_Grid()
+        public PathFinding_Grid()
         {
             InitializeComponent();
             IntializeMap();
@@ -214,6 +214,7 @@ namespace PathFindingAlgorithms
                 }
                 catch (ThreadInterruptedException e)
                 {
+
                 }
             });
 

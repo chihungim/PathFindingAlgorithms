@@ -1,7 +1,7 @@
 ﻿
 namespace PathFindingAlgorithms
 {
-    partial class BFS_Grid
+    partial class PathFinding_Grid
     {
         /// <summary>
         ///  Required designer variable.
@@ -223,7 +223,7 @@ namespace PathFindingAlgorithms
             this.label6.Text = "Remember Do Not Put the Start Point Right Next to The end Point";
             this.label6.UseWaitCursor = true;
             // 
-            // BFS_Grid
+            // PathFinding_Grid
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -240,7 +240,7 @@ namespace PathFindingAlgorithms
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "BFS_Grid";
+            this.Name = "PathFinding_Grid";
             this.Text = "Path Finding";
             this.UseWaitCursor = true;
             this.flowLayoutPanel1.ResumeLayout(false);

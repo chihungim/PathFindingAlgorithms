@@ -11,9 +11,7 @@ namespace PathFindingAlgorithms
     static class Program
     {
 
-
-
-        /// <summary>
+            /// <summary>
         ///  The main entry point for the application.
         /// </summary>
         [STAThread]
@@ -24,7 +22,7 @@ namespace PathFindingAlgorithms
             Application.SetHighDpiMode(HighDpiMode.SystemAware);
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new BFS_Graph());
+            Application.Run(new PathFinding_Graph());
         }
     }
 }

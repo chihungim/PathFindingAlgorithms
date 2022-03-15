@@ -12,12 +12,12 @@ using PathFindingAlgorithms.CustomControls;
 namespace PathFindingAlgorithms.BFS
 {
     
-    public partial class BFS_Graph : Form, IAlgorithm
+    public partial class PathFinding_Graph : Form, IAlgorithm
     {
-        public BFS_Graph()
+        public PathFinding_Graph()
         {
             InitializeComponent();
-
+            FindOption.SelectedIndex = 0;
         }
 
         #region ctrl
@@ -26,15 +26,16 @@ namespace PathFindingAlgorithms.BFS
             graphPanel1.BackgroundImage = null;
             graphPanel1.RemoveAllVertex();
         }
+
+
         private void ctrlPathFinding_Click(object sender, EventArgs e)
         {
             if (graphPanel1.VertexControlMenu.Start == null || graphPanel1.VertexControlMenu.End == null)
-            {
                 return;
-            }
 
-            ((IAlgorithm)this).PathFinding_BFS(graphPanel1.VertexControlMenu.Start, graphPanel1.VertexControlMenu.End);
-        }
+            var logic = ((IAlgorithm)this).Options(FindOption.SelectedIndex);
+            logic(graphPanel1.VertexControlMenu.Start, graphPanel1.VertexControlMenu.End);
+        } 
 
         private void ctrlLoadBg_Click(object sender, EventArgs e)
         {
@@ -48,7 +49,6 @@ namespace PathFindingAlgorithms.BFS
         }
 
         #endregion
-
         #region etc
         private void ToMyGithub_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
@@ -68,9 +68,5 @@ namespace PathFindingAlgorithms.BFS
         }
         #endregion
 
-        private void resetToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            graphPanel1.RemoveAllVertex();
-        }
     }
 }
