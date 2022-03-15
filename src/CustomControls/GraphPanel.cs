@@ -30,6 +30,7 @@ namespace PathFindingAlgorithms.CustomControls
                 var evt = args as MouseEventArgs;
                 if (evt.Button == MouseButtons.Left) AddVertexLabel(evt.Location);
             };
+            BackgroundImageLayout = ImageLayout.Stretch;
             BorderStyle = BorderStyle.FixedSingle;
             VertexControlMenu = new VertexControlMenu(this);
         }
@@ -122,6 +123,7 @@ class VertexControlMenu : ContextMenuStrip
                 End = null;
                 _ctrlConnect.Text = @"From";
             }
+
 
             _graphPanel.RemoveVertexLabel(vertex);
         }));

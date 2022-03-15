@@ -17,11 +17,13 @@ namespace PathFindingAlgorithms.BFS
         public BFS_Graph()
         {
             InitializeComponent();
+
         }
 
         #region ctrl
         private void ctrlReset_Click(object sender, EventArgs e)
         {
+            graphPanel1.BackgroundImage = null;
             graphPanel1.RemoveAllVertex();
         }
         private void ctrlPathFinding_Click(object sender, EventArgs e)
@@ -32,6 +34,17 @@ namespace PathFindingAlgorithms.BFS
             }
 
             ((IAlgorithm)this).PathFinding_BFS(graphPanel1.VertexControlMenu.Start, graphPanel1.VertexControlMenu.End);
+        }
+
+        private void ctrlLoadBg_Click(object sender, EventArgs e)
+        {
+            FileDialog fd = new OpenFileDialog();
+            fd.Filter = "ImageFiles|*.png;*.jpeg;*.jpg;*.gif";
+            if (fd.ShowDialog() == DialogResult.OK)
+            {
+                var path = fd.FileName;
+                graphPanel1.BackgroundImage = Image.FromFile(path);
+            }
         }
 
         #endregion
