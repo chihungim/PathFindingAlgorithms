@@ -8,11 +8,14 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml;
+using PathFindingAlgorithms;
+using PathFindingAlgorithms.CustomControls;
 
 namespace PathFindingAlgorithms.CustomControls
 {
-    class GraphPanel : Panel
+    class GraphPanel : Panel, IAlgorithm
     {
+        public VertexControlMenu VertexControlMenu;
         private const Int64 Max = 255;
         public GraphPanel()
         {
@@ -22,11 +25,16 @@ namespace PathFindingAlgorithms.CustomControls
         void Init()
         {
             this.Paint += Graph_Paint; //draw event
+            this.Click += (sender, args) =>
+            {
+                var evt = args as MouseEventArgs;
+                if (evt.Button == MouseButtons.Left) AddVertexLabel(evt.Location);
+            };
             BorderStyle = BorderStyle.FixedSingle;
+            VertexControlMenu = new VertexControlMenu(this);
         }
 
         
-
         #region Draw Edge
         public void Graph_Paint(Object sender, PaintEventArgs e)
         {
@@ -61,29 +69,9 @@ namespace PathFindingAlgorithms.CustomControls
                 return null;
             }
             var vertex = new VertexLabel(position, Controls.Count + "");
+            vertex.ContextMenuStrip = VertexControlMenu;
             Controls.Add(vertex);
             return vertex;
-        }
-
-        public void CreateEdge(VertexLabel from, VertexLabel to)
-        {
-            var fromList = from.Tag as Dictionary<VertexLabel, int>;
-            var toList = to.Tag as Dictionary<VertexLabel, int>;
-
-            if (fromList.ContainsKey(to))
-            {
-                Debug.Print("These Nodes are already connected");
-                return;
-            }
-            //undirected graph
-            Vector2 fromVector = new Vector2(from.Location.X + VertexLabel.DefaultVertexSize.Width / 2,
-                from.Location.Y + VertexLabel.DefaultVertexSize.Height / 2);
-            Vector2 toVector = new Vector2(to.Location.X + VertexLabel.DefaultVertexSize.Width / 2,
-                to.Location.Y + VertexLabel.DefaultVertexSize.Height / 2);
-            fromList.Add(to, (int)Vector2.Distance(fromVector,toVector));
-            toList.Add(from, (int)Vector2.Distance(fromVector, toVector));
-            Invalidate();
-
         }
 
         public void RemoveVertexLabel(VertexLabel vertexLabel)
@@ -102,3 +90,73 @@ namespace PathFindingAlgorithms.CustomControls
         #endregion
     }
 }
+
+
+class VertexControlMenu : ContextMenuStrip
+{
+    private ToolStripMenuItem _ctrlRemove ,_ctrlConnect,_ctrlToStart,_ctrlToEnd;
+
+    public VertexLabel Start, End;
+    private VertexLabel _target1, _target2;
+    private readonly GraphPanel _graphPanel;
+
+    public VertexControlMenu(GraphPanel graphPanel)
+    {
+        this._graphPanel = graphPanel;
+        InitItems();
+    }
+
+    private void InitItems()
+    {
+        Items.Add(_ctrlRemove = new ToolStripMenuItem("Remove", null, (sender, args) =>
+        {
+            var vertex = SourceControl as VertexLabel;
+            if (_target1 == Start)
+            {
+                Start = null;
+                _ctrlConnect.Text = @"From";
+            }
+
+            if (_target1 == End)
+            {
+                End = null;
+                _ctrlConnect.Text = @"From";
+            }
+
+            _graphPanel.RemoveVertexLabel(vertex);
+        }));
+
+        Items.Add(_ctrlConnect = new ToolStripMenuItem("From", null, (sender, args) =>
+        {
+            if (_target1 == null)
+            {
+                _target1 = (VertexLabel)SourceControl;
+                _ctrlConnect.Text = @"To";
+            }
+            else if (_target2 == null)
+            {
+                _target2 = (VertexLabel)SourceControl;
+                var graph = _target2.Parent as GraphPanel;
+                if (_target1 == _target2)
+                {
+                    _target2 = null;
+                    return;
+                }
+
+                _ctrlConnect.Text = @"From";
+                _target1.CreateEdge(_target2);
+                _target2.CreateEdge(_target1);
+                _target1 = null;
+                _target2 = null;
+                graph.Invalidate();
+            }
+        }));
+
+        Items.Add(_ctrlToStart =
+            new ToolStripMenuItem("start", null, (sender, args) => Start = SourceControl as VertexLabel));
+        Items.Add(_ctrlToEnd =
+            new ToolStripMenuItem("dest", null, (sender, args) =>  End = SourceControl as VertexLabel));
+    }
+}
+
+

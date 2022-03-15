@@ -51,7 +51,7 @@ namespace PathFindingAlgorithms
 
             path.Reverse();
             foreach (var p in path)
-                p.BackColor = VertexLabel.DefaultBackColor;
+                p.BackColor = Control.DefaultBackColor;
             
             foreach (var p in path)
                 p.BackColor = Color.DarkMagenta;

@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
+using System.Numerics;
 using System.Windows.Forms;
+using PathFindingAlgorithms.CustomControls;
 
 namespace PathFindingAlgorithms.CustomControls
 {
@@ -12,6 +15,11 @@ namespace PathFindingAlgorithms.CustomControls
         public static readonly Color DefaultVertexColor = Color.Aqua;
         public VertexLabel(Point point, String name)
         {
+            init(point, name);
+        }
+
+        void init(Point point, String name)
+        {
             Name = name;
             Tag = new Dictionary<VertexLabel, int>(); //key as object
             Size = DefaultVertexSize;
@@ -20,6 +28,25 @@ namespace PathFindingAlgorithms.CustomControls
             BackColor = DefaultVertexColor;
             Predecessor = null;
         }
-        
+
+        public void CreateEdge(VertexLabel vertex)
+        {
+            var connectionList = Tag as Dictionary<VertexLabel, int>;
+
+            if (connectionList.ContainsKey(vertex))
+            {
+                Debug.Print("These Nodes are already connected");
+                return;
+            }
+            //undirected graph
+            Vector2 fromVector = new Vector2(Location.X + VertexLabel.DefaultVertexSize.Width / 2,
+                Location.Y + VertexLabel.DefaultVertexSize.Height / 2);
+            Vector2 toVector = new Vector2(vertex.Location.X + VertexLabel.DefaultVertexSize.Width / 2,
+                vertex.Location.Y + VertexLabel.DefaultVertexSize.Height / 2);
+            connectionList.Add(vertex, (int)Vector2.Distance(fromVector, toVector));
+        }
+
     }
 }
+
+
