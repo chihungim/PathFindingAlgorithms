@@ -1,19 +1,13 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Diagnostics;
 using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace PathFindingAlgorithms
+namespace PathFindingAlgorithms.Form
 {
-    public partial class PathFinding_Grid : Form
+    public partial class PathFindingGrid : System.Windows.Forms.Form
     {
         private Thread _animationThread = null;
         Label[,] _map = null;
@@ -21,7 +15,7 @@ namespace PathFindingAlgorithms
         private Label _end = null;
 
         #region init
-        public PathFinding_Grid()
+        public PathFindingGrid()
         {
             InitializeComponent();
             IntializeMap();

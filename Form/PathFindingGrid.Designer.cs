@@ -1,7 +1,7 @@
 ﻿
-namespace PathFindingAlgorithms
+namespace PathFindingAlgorithms.Form
 {
-    partial class PathFinding_Grid
+    partial class PathFindingGrid
     {
         /// <summary>
         ///  Required designer variable.
@@ -223,7 +223,7 @@ namespace PathFindingAlgorithms
             this.label6.Text = "Remember Do Not Put the Start Point Right Next to The end Point";
             this.label6.UseWaitCursor = true;
             // 
-            // PathFinding_Grid
+            // PathFindingGrid
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -240,7 +240,7 @@ namespace PathFindingAlgorithms
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "PathFinding_Grid";
+            this.Name = "PathFindingGrid";
             this.Text = "Path Finding";
             this.UseWaitCursor = true;
             this.flowLayoutPanel1.ResumeLayout(false);

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using PathFindingAlgorithms.BFS;
+using PathFindingAlgorithms.Form;
 
 namespace PathFindingAlgorithms
 {
@@ -22,7 +22,7 @@ namespace PathFindingAlgorithms
             Application.SetHighDpiMode(HighDpiMode.SystemAware);
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new PathFinding_Graph());
+            Application.Run(new PathFindingGraph());
         }
     }
 }

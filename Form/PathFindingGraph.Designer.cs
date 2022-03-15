@@ -1,7 +1,7 @@
 ﻿
-namespace PathFindingAlgorithms.BFS
+namespace PathFindingAlgorithms.Form
 {
-    partial class PathFinding_Graph
+    partial class PathFindingGraph
     {
         /// <summary>
         /// Required designer variable.
@@ -134,7 +134,7 @@ namespace PathFindingAlgorithms.BFS
             this.Controls.Add(this.graphPanel1);
             this.Controls.Add(this.ToMyGithub);
             this.Controls.Add(this.Title);
-            this.Name = "PathFinding_Graph";
+            this.Name = "PathFindingGraph";
             this.Padding = new System.Windows.Forms.Padding(5);
             this.Text = "PathFinding";
             this.ResumeLayout(false);

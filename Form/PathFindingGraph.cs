@@ -1,20 +1,14 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
-using System.Security.Cryptography;
-using System.Threading;
 using System.Windows.Forms;
-using PathFindingAlgorithms;
-using PathFindingAlgorithms.CustomControls;
 
-namespace PathFindingAlgorithms.BFS
+namespace PathFindingAlgorithms.Form
 {
     
-    public partial class PathFinding_Graph : Form, IAlgorithm
+    public partial class PathFindingGraph : System.Windows.Forms.Form, IAlgorithm
     {
-        public PathFinding_Graph()
+        public PathFindingGraph()
         {
             InitializeComponent();
             FindOption.SelectedIndex = 0;
