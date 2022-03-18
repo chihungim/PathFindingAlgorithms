@@ -10,8 +10,6 @@ namespace PathFindingAlgorithms
 {
     interface IAlgorithm
     {
-
-
         Action<VertexLabel, VertexLabel> Options(int idx)
         {
             Action<VertexLabel, VertexLabel>[] options =
@@ -23,8 +21,6 @@ namespace PathFindingAlgorithms
 
             return options[idx];
         }
-
-
 
         #region PathFind-BFS
         public void PathFinding_BFS(VertexLabel startVertexLabel, VertexLabel destVertexLabel)
@@ -41,7 +37,7 @@ namespace PathFindingAlgorithms
  
                 if (from == destVertexLabel)
                 {
-                    trackBFS(destVertexLabel);
+                    traceBFS(destVertexLabel);
                     return;
                 }
 
@@ -57,7 +53,7 @@ namespace PathFindingAlgorithms
             }
         }
 
-        public void trackBFS(VertexLabel destVertexLabel) 
+        public void traceBFS(VertexLabel destVertexLabel) 
         {
             List<VertexLabel> path = new List<VertexLabel>();
             while (destVertexLabel != null)
@@ -76,21 +72,90 @@ namespace PathFindingAlgorithms
 
 
         #endregion
-
-        #region PathFind-A*
-        public void PathFinding_AStar(VertexLabel start, VertexLabel end)
-        {
-
-        }
-
-
-        #endregion
-
+        
         #region PathFind-Dijkstra
 
         void PathFinding_Dijkstra(VertexLabel start, VertexLabel end)
         {
+            const int INF = 1000000000;
+            var g = start.Parent as GraphPanel;
+            var visited = new List<VertexLabel>();
+            var dist = new Dictionary<VertexLabel, int>();
+            var parent = new Dictionary<VertexLabel, VertexLabel>();
 
+            foreach (VertexLabel vertex in g.Controls)
+                dist.Add(vertex, INF); //inf 로 초기화
+
+            parent[start] = start;
+            dist[start] = 0;
+
+            while (true)
+            {
+                VertexLabel from = null;
+                int min = Int32.MaxValue;
+                foreach (VertexLabel vertex in g.Controls)
+                {
+                    if (visited.Contains(vertex)) continue;
+
+                    if (dist[vertex] == Int32.MaxValue) continue;
+
+                    if (dist[vertex] < min)
+                    {
+                        min = dist[vertex];
+                        from = vertex;
+                    }
+
+                    Debug.Print(dist[vertex]+"");
+                }
+
+                if (from == null)
+                    break;
+
+                visited.Add(from);
+
+                foreach (VertexLabel next in g.Controls)
+                {
+                    if(next == from) continue;
+                    if (visited.Contains(next)) continue;
+                    var adj = (Dictionary<VertexLabel, int>)from.Tag;
+                    int nextDist = dist[from] + (adj.ContainsKey(next) ? adj[next] :INF );
+                    if (nextDist < dist[next])
+                    {
+                        dist[next] = nextDist;
+                        parent[next] = from;
+                    }
+                }
+            }
+            traceDijkstra(parent, end);
+        }
+
+        void traceDijkstra(Dictionary<VertexLabel,VertexLabel> parent, VertexLabel dest)
+        {
+            List<VertexLabel> path = new List<VertexLabel>();
+            while (parent[dest] != dest)
+            {
+                path.Add(dest);
+                dest = parent[dest];
+            }
+
+            path.Add(dest);
+
+            path.Add(dest);
+            path.Reverse();
+
+            foreach (VertexLabel v in path)
+                v.BackColor = Color.DarkMagenta;
+        }
+
+        
+
+
+        #endregion
+
+        #region PathFind-A*
+        public void PathFinding_AStar(VertexLabel start, VertexLabel end)
+        {
+           
         }
 
 

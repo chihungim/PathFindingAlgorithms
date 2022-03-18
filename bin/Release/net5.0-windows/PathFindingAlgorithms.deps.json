@@ -1,0 +1,23 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v5.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v5.0": {
+      "PathFindingAlgorithms/1.0.0": {
+        "runtime": {
+          "PathFindingAlgorithms.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "PathFindingAlgorithms/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

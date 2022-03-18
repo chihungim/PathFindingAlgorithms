@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Linq;
 using System.Numerics;
 using System.Text;
@@ -40,7 +41,7 @@ namespace PathFindingAlgorithms.CustomControls
         public void Graph_Paint(Object sender, PaintEventArgs e)
         {
             using var g = e.Graphics;
-
+            g.SmoothingMode = SmoothingMode.AntiAlias;
             var blackPen = new Pen(Color.Black);
                                
             foreach (Label from in Controls)
@@ -71,6 +72,8 @@ namespace PathFindingAlgorithms.CustomControls
             }
             var vertex = new VertexLabel(position, Controls.Count + "");
             vertex.ContextMenuStrip = VertexControlMenu;
+
+
             Controls.Add(vertex);
             return vertex;
         }
@@ -112,19 +115,25 @@ class VertexControlMenu : ContextMenuStrip
         Items.Add(_ctrlRemove = new ToolStripMenuItem("Remove", null, (sender, args) =>
         {
             var vertex = SourceControl as VertexLabel;
-            if (_target1 == Start)
+
+
+            if (vertex == _target1)
+            {
+                _target1 = null;
+                _ctrlConnect.Text = @"From";
+            }
+
+            if (vertex == Start)
             {
                 Start = null;
                 _ctrlConnect.Text = @"From";
             }
 
-            if (_target1 == End)
+            if (vertex == End)
             {
                 End = null;
                 _ctrlConnect.Text = @"From";
             }
-
-
             _graphPanel.RemoveVertexLabel(vertex);
         }));
 
