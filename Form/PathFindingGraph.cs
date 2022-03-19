@@ -2,6 +2,7 @@
 using System.Diagnostics;
 using System.Drawing;
 using System.Windows.Forms;
+using PathFindingAlgorithms.CustomControls;
 
 namespace PathFindingAlgorithms.Form
 {
@@ -26,6 +27,9 @@ namespace PathFindingAlgorithms.Form
         {
             if (graphPanel1.VertexControlMenu.Start == null || graphPanel1.VertexControlMenu.End == null)
                 return;
+
+            foreach (VertexLabel vertex in graphPanel1.Controls)
+                vertex.BackColor = VertexLabel.DefaultVertexColor;
 
             var logic = ((IAlgorithm)this).Options(FindOption.SelectedIndex);
             logic(graphPanel1.VertexControlMenu.Start, graphPanel1.VertexControlMenu.End);

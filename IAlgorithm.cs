@@ -132,11 +132,20 @@ namespace PathFindingAlgorithms
         void traceDijkstra(Dictionary<VertexLabel,VertexLabel> parent, VertexLabel dest)
         {
             List<VertexLabel> path = new List<VertexLabel>();
-            while (parent[dest] != dest)
+            try
             {
-                path.Add(dest);
-                dest = parent[dest];
+                while (parent[dest] != dest)
+                {
+                    path.Add(dest);
+                    dest = parent[dest];
+                }
             }
+            catch (Exception e)
+            {
+                Debug.WriteLine("Cannot fine the path!!!");
+                return;
+            }
+
 
             path.Add(dest);
 
@@ -150,15 +159,32 @@ namespace PathFindingAlgorithms
         
 
 
-        #endregion
+        #endregion 
 
         #region PathFind-A*
+        
         public void PathFinding_AStar(VertexLabel start, VertexLabel end)
         {
-           
+            
+            var visited = new List<VertexLabel>();
+            var dist = new Dictionary<VertexLabel, int>();
+            
+            var pq = new PriorityQueue<KeyValuePair<int,VertexLabel>, int>();
+            pq.Enqueue(new KeyValuePair<int, VertexLabel>(0,start), 0);
+            bool success = false;
+            while (pq.Count != 0)
+            {
+                var v = pq.Dequeue();
+                var cost = v.Key;
+                var vertex = v.Value;
+                if (vertex == end)
+                {
+                    success = true;
+                    break;
+                }
+            }
         }
-
-
+        
         #endregion
 
     }

@@ -112,31 +112,6 @@ class VertexControlMenu : ContextMenuStrip
 
     private void InitItems()
     {
-        Items.Add(_ctrlRemove = new ToolStripMenuItem("Remove", null, (sender, args) =>
-        {
-            var vertex = SourceControl as VertexLabel;
-
-
-            if (vertex == _target1)
-            {
-                _target1 = null;
-                _ctrlConnect.Text = @"From";
-            }
-
-            if (vertex == Start)
-            {
-                Start = null;
-                _ctrlConnect.Text = @"From";
-            }
-
-            if (vertex == End)
-            {
-                End = null;
-                _ctrlConnect.Text = @"From";
-            }
-            _graphPanel.RemoveVertexLabel(vertex);
-        }));
-
         Items.Add(_ctrlConnect = new ToolStripMenuItem("From", null, (sender, args) =>
         {
             if (_target1 == null)
@@ -162,11 +137,35 @@ class VertexControlMenu : ContextMenuStrip
                 graph.Invalidate();
             }
         }));
-
         Items.Add(_ctrlToStart =
             new ToolStripMenuItem("start", null, (sender, args) => Start = SourceControl as VertexLabel));
         Items.Add(_ctrlToEnd =
             new ToolStripMenuItem("dest", null, (sender, args) =>  End = SourceControl as VertexLabel));
+
+        Items.Add(_ctrlRemove = new ToolStripMenuItem("Remove", null, (sender, args) =>
+        {
+            var vertex = SourceControl as VertexLabel;
+
+
+            if (vertex == _target1)
+            {
+                _target1 = null;
+                _ctrlConnect.Text = @"From";
+            }
+
+            if (vertex == Start)
+            {
+                Start = null;
+                _ctrlConnect.Text = @"From";
+            }
+
+            if (vertex == End)
+            {
+                End = null;
+                _ctrlConnect.Text = @"From";
+            }
+            _graphPanel.RemoveVertexLabel(vertex);
+        }));
     }
 }
 
