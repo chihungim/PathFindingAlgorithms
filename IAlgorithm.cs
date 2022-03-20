@@ -3,7 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
+using System.Drawing.Design;
 using System.Numerics;
+using System.Threading;
 using System.Windows.Forms;
 using PathFindingAlgorithms.CustomControls;
 
@@ -153,11 +155,6 @@ namespace PathFindingAlgorithms
 
         #region PathFind-A*
 
-        
- 
-
-     
-
         public void PathFinding_AStar(VertexLabel start, VertexLabel end)
         {
             const int inf = 1000000000;
@@ -181,7 +178,7 @@ namespace PathFindingAlgorithms
                     n.Location.Y + VertexLabel.DefaultVertexSize.Height / 2);
                 return (int) Vector2.Distance(endVector2, toVector2);
             };
-
+            List<VertexLabel> visited = new List<VertexLabel>();
             var pq = new PriorityQueue<VertexLabel, int>();
             pq.Enqueue(start,  h(start));
 
@@ -195,7 +192,7 @@ namespace PathFindingAlgorithms
                 fCost.Add(vertex, inf);
 
             fCost[start] = h(start);
-            
+            visited.Add(start);
 
             while (pq.Count != 0)
             {
@@ -206,18 +203,26 @@ namespace PathFindingAlgorithms
                     Trace_AStar(current);
                     return;
                 }
-
+                
                 var d = current.Tag as Dictionary<VertexLabel, int>;
                 foreach (var neighbor in d.Keys)
                 {
-                    var nextCost = gCost[current] + d[neighbor]; 
+                    var nextCost = gCost[current] + d[neighbor];
+                    Thread.Sleep(100);
+                    Application.DoEvents();
+                    neighbor.BackColor = Color.Fuchsia;
                     Debug.Print(nextCost.ToString());
                     if (nextCost < gCost[neighbor])
                     {
                         neighbor.Predecessor = current;
                         gCost[neighbor] = nextCost;
                         fCost[neighbor] = nextCost + h(neighbor);
-                        pq.Enqueue(neighbor, fCost[neighbor]);
+                        if (!visited.Contains(neighbor))
+                        {
+                            pq.Enqueue(neighbor, fCost[neighbor]);
+                            neighbor.BackColor = Color.Red;
+                            visited.Add(neighbor);
+                        }
                     }
                 }
             }
@@ -243,7 +248,6 @@ namespace PathFindingAlgorithms
             foreach (VertexLabel v in path)
                 v.BackColor = Color.DarkMagenta;
         }
-        #endregion
-
     }
+    #endregion
 }
