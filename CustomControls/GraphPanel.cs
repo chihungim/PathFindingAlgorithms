@@ -42,15 +42,18 @@ namespace PathFindingAlgorithms.CustomControls
         {
             using var g = e.Graphics;
             g.SmoothingMode = SmoothingMode.AntiAlias;
-            var blackPen = new Pen(Color.Black);
+            var greenPen = new Pen(Color.ForestGreen);
                                
             foreach (Label from in Controls)
             {
+                var dist = from.Tag as Dictionary<VertexLabel, int>;
                 int x1 = from.Location.X + VertexLabel.DefaultVertexSize.Width/2, y1 = from.Location.Y + VertexLabel.DefaultVertexSize.Height / 2;
                 foreach (var to in ((Dictionary<VertexLabel,int>)@from.Tag).Keys)
                 {
                     int x2 = to.Location.X + VertexLabel.DefaultVertexSize.Width / 2, y2 = to.Location.Y + VertexLabel.DefaultVertexSize.Height / 2;
-                    g.DrawLine(blackPen, x1, y1, x2, y2);
+                    g.DrawLine(greenPen, x1, y1, x2, y2);
+                    var s = g.MeasureString(dist[to] + "", Font);
+                    g.DrawString(dist[to]+"", Font,Brushes.DeepPink ,((x1+x2)/2) - s.Width/2, ((y1+y2)/2) - s.Height/2);
                 }
             }
         }

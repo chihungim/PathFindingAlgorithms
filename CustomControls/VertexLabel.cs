@@ -14,13 +14,15 @@ namespace PathFindingAlgorithms.CustomControls
     {
         public VertexLabel Predecessor { get; set;}
         public static readonly Size DefaultVertexSize = new Size(30, 30);
-        public static readonly Color DefaultVertexColor = Color.Aqua;
+        public static readonly Color DefaultVertexColor = Color.Chartreuse;
         public int Radius = 30;
 
         public VertexLabel(Point point, String name)
         {
             init(point, name);
         }
+
+        #region RoundLabel
 
         [System.Runtime.InteropServices.DllImport("gdi32.dll")]
         private static extern IntPtr CreateRoundRectRgn(int nLeftRect, int nTopRect,
@@ -52,6 +54,9 @@ namespace PathFindingAlgorithms.CustomControls
             base.OnSizeChanged(e);
             this.RecreateRegion();
         }
+
+        #endregion
+
 
         void init(Point point, String name)
         {

@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
+using System.Numerics;
 using System.Windows.Forms;
 using PathFindingAlgorithms.CustomControls;
 
@@ -143,7 +144,6 @@ namespace PathFindingAlgorithms
                 return;
             }
 
-
             path.Reverse();
 
             foreach (VertexLabel v in path)
@@ -152,29 +152,97 @@ namespace PathFindingAlgorithms
         #endregion 
 
         #region PathFind-A*
+
         
+ 
+
+     
+
         public void PathFinding_AStar(VertexLabel start, VertexLabel end)
         {
+            const int inf = 1000000000;
+            var graph = start.Parent as GraphPanel;
+            //from start to n distance
+            Func<VertexLabel, int> g = n =>  
+            {
+                var startVector2 = new Vector2(start.Location.X + VertexLabel.DefaultVertexSize.Width / 2,
+                    start.Location.Y + VertexLabel.DefaultVertexSize.Height / 2);
+                var toVector2 = new Vector2(n.Location.X + VertexLabel.DefaultVertexSize.Width / 2,
+                    n.Location.Y + VertexLabel.DefaultVertexSize.Height / 2);
+
+                return (int) Vector2.Distance(startVector2, toVector2);
+            };
+            //from end to n distance
+            Func<VertexLabel, int> h = n =>
+            {
+                var endVector2 = new Vector2(end.Location.X + VertexLabel.DefaultVertexSize.Width / 2,
+                    end.Location.Y + VertexLabel.DefaultVertexSize.Height / 2);
+                var toVector2 = new Vector2(n.Location.X + VertexLabel.DefaultVertexSize.Width / 2,
+                    n.Location.Y + VertexLabel.DefaultVertexSize.Height / 2);
+                return (int) Vector2.Distance(endVector2, toVector2);
+            };
+
+            var pq = new PriorityQueue<VertexLabel, int>();
+            pq.Enqueue(start,  h(start));
+
+            var gCost = new Dictionary<VertexLabel, int>();
+            foreach (VertexLabel vertex in graph.Controls)
+                gCost.Add(vertex, inf);
+            gCost[start] = 0;
+
+            var fCost = new Dictionary<VertexLabel, int>();
+            foreach (VertexLabel vertex in graph.Controls)
+                fCost.Add(vertex, inf);
+
+            fCost[start] = h(start);
             
-            var visited = new List<VertexLabel>();
-            var dist = new Dictionary<VertexLabel, int>();
-            
-            var pq = new PriorityQueue<KeyValuePair<int,VertexLabel>, int>();
-            pq.Enqueue(new KeyValuePair<int, VertexLabel>(0,start), 0);
-            bool success = false;
+
             while (pq.Count != 0)
             {
-                var v = pq.Dequeue();
-                var cost = v.Key;
-                var vertex = v.Value;
-                if (vertex == end)
+                var current = pq.Dequeue();
+
+                if (current == end)
                 {
-                    success = true;
-                    break;
+                    Trace_AStar(current);
+                    return;
+                }
+
+                var d = current.Tag as Dictionary<VertexLabel, int>;
+                foreach (var neighbor in d.Keys)
+                {
+                    var nextCost = gCost[current] + d[neighbor]; 
+                    Debug.Print(nextCost.ToString());
+                    if (nextCost < gCost[neighbor])
+                    {
+                        neighbor.Predecessor = current;
+                        gCost[neighbor] = nextCost;
+                        fCost[neighbor] = nextCost + h(neighbor);
+                        pq.Enqueue(neighbor, fCost[neighbor]);
+                    }
                 }
             }
         }
-        
+
+
+        void Trace_AStar(VertexLabel end)
+        {
+            List<VertexLabel> path = new List<VertexLabel>();
+            while (end != null)
+            {
+                path.Add(end);
+                end = end.Predecessor;
+            }
+
+            if (path.Count < 2)
+            {
+                return;
+            }
+
+            path.Reverse();
+
+            foreach (VertexLabel v in path)
+                v.BackColor = Color.DarkMagenta;
+        }
         #endregion
 
     }
