@@ -10,16 +10,25 @@ namespace PathFindingAlgorithms
 {
     interface IAlgorithm
     {
-        Action<VertexLabel, VertexLabel> Options(int idx)
-        {
-            Action<VertexLabel, VertexLabel>[] options =
-            {
-                PathFinding_BFS,
-                PathFinding_Dijkstra,
-                PathFinding_AStar
-            };
 
-            return options[idx];
+        enum Algorithms
+        {
+            Bfs = 0,
+            Dijkstra = 1,
+            AStar = 2
+        }
+
+        Action<VertexLabel, VertexLabel> PathFinding_Algorithm(Algorithms index)
+        {
+            if (index == Algorithms.Bfs)
+                return PathFinding_BFS;
+            else if(index == Algorithms.Dijkstra)
+                return PathFinding_Dijkstra;
+            else if (index == Algorithms.AStar)
+                return PathFinding_AStar;
+            else
+                return null;
+
         }
 
         #region PathFind-BFS
@@ -37,7 +46,7 @@ namespace PathFindingAlgorithms
  
                 if (from == destVertexLabel)
                 {
-                    traceBFS(destVertexLabel);
+                    Trace_BFS(destVertexLabel);
                     return;
                 }
 
@@ -52,8 +61,7 @@ namespace PathFindingAlgorithms
                 }
             }
         }
-
-        public void traceBFS(VertexLabel destVertexLabel) 
+        public void Trace_BFS(VertexLabel destVertexLabel) 
         {
             List<VertexLabel> path = new List<VertexLabel>();
             while (destVertexLabel != null)
@@ -69,25 +77,21 @@ namespace PathFindingAlgorithms
             foreach (var p in path)
                 p.BackColor = Color.DarkMagenta;
         }
-
-
         #endregion
         
         #region PathFind-Dijkstra
-
         void PathFinding_Dijkstra(VertexLabel start, VertexLabel end)
         {
-            const int INF = 1000000000;
+            const int inf = 1000000000;
             var g = start.Parent as GraphPanel;
             var visited = new List<VertexLabel>();
             var dist = new Dictionary<VertexLabel, int>();
-            var parent = new Dictionary<VertexLabel, VertexLabel>();
 
             foreach (VertexLabel vertex in g.Controls)
-                dist.Add(vertex, INF); //inf 로 초기화
+                dist.Add(vertex, inf); 
 
-            parent[start] = start;
             dist[start] = 0;
+            start.Predecessor = null;
 
             while (true)
             {
@@ -104,8 +108,6 @@ namespace PathFindingAlgorithms
                         min = dist[vertex];
                         from = vertex;
                     }
-
-                    Debug.Print(dist[vertex]+"");
                 }
 
                 if (from == null)
@@ -118,47 +120,35 @@ namespace PathFindingAlgorithms
                     if(next == from) continue;
                     if (visited.Contains(next)) continue;
                     var adj = (Dictionary<VertexLabel, int>)from.Tag;
-                    int nextDist = dist[from] + (adj.ContainsKey(next) ? adj[next] :INF );
-                    if (nextDist < dist[next])
-                    {
-                        dist[next] = nextDist;
-                        parent[next] = from;
-                    }
+                    var nextDist = dist[from] + (adj.ContainsKey(next) ? adj[next] :inf );
+                    if (nextDist >= dist[next]) continue;
+                    dist[next] = nextDist;
+                    next.Predecessor = @from;
                 }
             }
-            traceDijkstra(parent, end);
+            Trace_Dijkstra(end);
         }
 
-        void traceDijkstra(Dictionary<VertexLabel,VertexLabel> parent, VertexLabel dest)
+        void Trace_Dijkstra(VertexLabel dest)
         {
             List<VertexLabel> path = new List<VertexLabel>();
-            try
+            while (dest != null)
             {
-                while (parent[dest] != dest)
-                {
-                    path.Add(dest);
-                    dest = parent[dest];
-                }
+                path.Add(dest);
+                dest = dest.Predecessor;
             }
-            catch (Exception e)
+
+            if (path.Count < 2)
             {
-                Debug.WriteLine("Cannot fine the path!!!");
                 return;
             }
 
 
-            path.Add(dest);
-
-            path.Add(dest);
             path.Reverse();
 
             foreach (VertexLabel v in path)
                 v.BackColor = Color.DarkMagenta;
         }
-
-        
-
-
         #endregion 
 
         #region PathFind-A*

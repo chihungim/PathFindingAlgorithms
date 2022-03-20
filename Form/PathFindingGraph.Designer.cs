@@ -35,7 +35,7 @@ namespace PathFindingAlgorithms.Form
             this.FindPath = new System.Windows.Forms.Button();
             this.ctrlClear = new System.Windows.Forms.Button();
             this.LoadBG = new System.Windows.Forms.Button();
-            this.FindOption = new System.Windows.Forms.ComboBox();
+            this.ctrlLogic = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // ToMyGithub
@@ -107,27 +107,27 @@ namespace PathFindingAlgorithms.Form
             this.LoadBG.UseVisualStyleBackColor = true;
             this.LoadBG.Click += new System.EventHandler(this.ctrlLoadBg_Click);
             // 
-            // FindOption
+            // ctrlLogic
             // 
-            this.FindOption.DisplayMember = "0";
-            this.FindOption.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.FindOption.FormattingEnabled = true;
-            this.FindOption.Items.AddRange(new object[] {
+            this.ctrlLogic.DisplayMember = "0";
+            this.ctrlLogic.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.ctrlLogic.FormattingEnabled = true;
+            this.ctrlLogic.Items.AddRange(new object[] {
             "BFS",
             "Dijkstra",
             "A*"});
-            this.FindOption.Location = new System.Drawing.Point(419, 18);
-            this.FindOption.Name = "FindOption";
-            this.FindOption.Size = new System.Drawing.Size(121, 23);
-            this.FindOption.TabIndex = 17;
+            this.ctrlLogic.Location = new System.Drawing.Point(419, 18);
+            this.ctrlLogic.Name = "ctrlLogic";
+            this.ctrlLogic.Size = new System.Drawing.Size(121, 23);
+            this.ctrlLogic.TabIndex = 17;
             // 
-            // PathFinding_Graph
+            // PathFindingGraph
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(811, 461);
-            this.Controls.Add(this.FindOption);
+            this.Controls.Add(this.ctrlLogic);
             this.Controls.Add(this.ctrlClear);
             this.Controls.Add(this.LoadBG);
             this.Controls.Add(this.FindPath);
@@ -149,6 +149,6 @@ namespace PathFindingAlgorithms.Form
         private System.Windows.Forms.Button FindPath;
         private System.Windows.Forms.Button ctrlClear;
         private System.Windows.Forms.Button LoadBG;
-        private System.Windows.Forms.ComboBox FindOption;
+        private System.Windows.Forms.ComboBox ctrlLogic;
     }
 }

@@ -12,7 +12,7 @@ namespace PathFindingAlgorithms.Form
         public PathFindingGraph()
         {
             InitializeComponent();
-            FindOption.SelectedIndex = 0;
+            ctrlLogic.SelectedIndex = 0;
         }
 
         #region ctrl
@@ -31,7 +31,7 @@ namespace PathFindingAlgorithms.Form
             foreach (VertexLabel vertex in graphPanel1.Controls)
                 vertex.BackColor = VertexLabel.DefaultVertexColor;
 
-            var logic = ((IAlgorithm)this).Options(FindOption.SelectedIndex);
+            var logic = ((IAlgorithm) this).PathFinding_Algorithm((IAlgorithm.Algorithms) ctrlLogic.SelectedIndex);
             logic(graphPanel1.VertexControlMenu.Start, graphPanel1.VertexControlMenu.End);
         } 
 
@@ -47,6 +47,7 @@ namespace PathFindingAlgorithms.Form
         }
 
         #endregion
+
         #region etc
         private void ToMyGithub_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
