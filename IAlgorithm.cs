@@ -197,20 +197,17 @@ namespace PathFindingAlgorithms
             while (pq.Count != 0)
             {
                 var current = pq.Dequeue();
-
                 if (current == end)
                 {
+                    start.Predecessor = null;
                     Trace_AStar(current);
                     return;
                 }
-                
+
                 var d = current.Tag as Dictionary<VertexLabel, int>;
                 foreach (var neighbor in d.Keys)
                 {
                     var nextCost = gCost[current] + d[neighbor];
-                    Thread.Sleep(100);
-                    Application.DoEvents();
-                    neighbor.BackColor = Color.Fuchsia;
                     Debug.Print(nextCost.ToString());
                     if (nextCost < gCost[neighbor])
                     {
@@ -220,7 +217,6 @@ namespace PathFindingAlgorithms
                         if (!visited.Contains(neighbor))
                         {
                             pq.Enqueue(neighbor, fCost[neighbor]);
-                            neighbor.BackColor = Color.Red;
                             visited.Add(neighbor);
                         }
                     }
