@@ -1,10 +1,15 @@
-# 이게 무엇인가?
-Winform 으로 가시화된 길찾기 알고리즘
-# BFS
-BFS란?
-(breath first and search) <br>
+# What it this?
+Pathfinding Algorithms Visualized with Winform
 
-# Dijkstra
+# How to use?
+Download lastest release and run the .exe file.
 
 
-# A*
+# -Used Algorithms Explanations-
+(I'm still working on it.)
+
+BFS 
+
+Dijkstra
+
+A*
