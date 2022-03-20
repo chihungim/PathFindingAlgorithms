@@ -5,7 +5,7 @@ Pathfinding Algorithms Visualized with Winform
 Download lastest release and run the .exe file.
 
 
-# -Used Algorithms Explanations-
+# -Used Algorithms and Explanations-
 (I'm still working on it.)
 
 BFS 
