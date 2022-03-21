@@ -199,7 +199,7 @@ namespace PathFindingAlgorithms
                 var current = pq.Dequeue();
                 if (current == end)
                 {
-                    start.Predecessor = null;
+                    start.Predecessor = null; // IDK
                     Trace_AStar(current);
                     return;
                 }
